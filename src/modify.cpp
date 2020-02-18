@@ -911,7 +911,7 @@ void Modify::add_fix(int narg, char **arg, int trysuffix)
 
   for (int i = 0; i < nfix_restart_global; i++)
     if (strcmp(id_restart_global[i],fix[ifix]->id) == 0 &&
-        strcmp(style_restart_global[i],fix[ifix]->style) == 0) {
+        utils::nosuffixmatch(style_restart_global[i],fix[ifix]->style)) {
       fix[ifix]->restart(state_restart_global[i]);
       used_restart_global[i] = 1;
       if (comm->me == 0) {
@@ -931,7 +931,7 @@ void Modify::add_fix(int narg, char **arg, int trysuffix)
 
   for (int i = 0; i < nfix_restart_peratom; i++)
     if (strcmp(id_restart_peratom[i],fix[ifix]->id) == 0 &&
-        strcmp(style_restart_peratom[i],fix[ifix]->style) == 0) {
+        utils::nosuffixmatch(style_restart_peratom[i],fix[ifix]->style)) {
       used_restart_peratom[i] = 1;
       for (int j = 0; j < atom->nlocal; j++)
         fix[ifix]->unpack_restart(j,index_restart_peratom[i]);

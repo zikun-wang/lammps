@@ -856,7 +856,7 @@ void ReadRestart::header(int incompatible)
     // create new AtomVec class using any stored args
 
     } else if (flag == ATOM_STYLE) {
-      char *style = read_string();
+      char *style = utils::stripsuffix(read_string());
       int nargcopy = read_int();
       char **argcopy = new char*[nargcopy];
       for (int i = 0; i < nargcopy; i++)
@@ -996,7 +996,7 @@ void ReadRestart::force_fields()
   while (flag >= 0) {
 
     if (flag == PAIR) {
-      style = read_string();
+      style = utils::stripsuffix(read_string());
       force->create_pair(style,1);
       delete [] style;
       if (comm->me ==0) {
@@ -1008,7 +1008,7 @@ void ReadRestart::force_fields()
       force->pair->read_restart(fp);
 
     } else if (flag == NO_PAIR) {
-      style = read_string();
+      style = utils::stripsuffix(read_string());
       if (comm->me ==0) {
         if (screen) fprintf(screen,"  pair style %s stores no "
                             "restart info\n", style);
@@ -1019,7 +1019,7 @@ void ReadRestart::force_fields()
       force->pair_restart = style;
 
     } else if (flag == BOND) {
-      style = read_string();
+      style = utils::stripsuffix(read_string());
       force->create_bond(style,1);
       delete [] style;
       if (comm->me ==0) {
@@ -1031,7 +1031,7 @@ void ReadRestart::force_fields()
       force->bond->read_restart(fp);
 
     } else if (flag == ANGLE) {
-      style = read_string();
+      style = utils::stripsuffix(read_string());
       force->create_angle(style,1);
       delete [] style;
       if (comm->me ==0) {
@@ -1043,7 +1043,7 @@ void ReadRestart::force_fields()
       force->angle->read_restart(fp);
 
     } else if (flag == DIHEDRAL) {
-      style = read_string();
+      style = utils::stripsuffix(read_string());
       force->create_dihedral(style,1);
       delete [] style;
       if (comm->me ==0) {
@@ -1055,7 +1055,7 @@ void ReadRestart::force_fields()
       force->dihedral->read_restart(fp);
 
     } else if (flag == IMPROPER) {
-      style = read_string();
+      style = utils::stripsuffix(read_string());
       force->create_improper(style,1);
       delete [] style;
       if (comm->me ==0) {

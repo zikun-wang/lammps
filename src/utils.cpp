@@ -84,7 +84,60 @@ bool utils::strmatch(std::string text, std::string pattern)
   return (pos >= 0);
 }
 
+/* duplicate string */
+char *utils::strdup(const char *in)
+{
+  int len = strlen(in)+1;
+  char *out = new char[len];
+  strcpy(out,in);
+  return out;
+}
+
+/** List of known accelerator suffixes */
+static const char *accelsuffix[] =
+{
+  (const char *)"/gpu",
+  (const char *)"/intel",
+  (const char *)"/kk",
+  (const char *)"/omp",
+  (const char *)"/opt",
+  NULL
+};
+
+/* Strip known accelertor suffixes from input string */
+
+char *utils::stripsuffix(char *style)
+{
+  if (style == NULL) return style;
+
+  char *slash = strrchr(style,'/');
+  for (int i = 0; accelsuffix[i] != NULL; ++i) {
+    if (strcmp(slash,accelsuffix[i]) == 0) {
+      *slash = '\0';
+      return style;
+    }
+  }
+  return style;
+}
+
+/** Compare two strings without considering accelerator suffixes
+ *
+ * We need to work on copies of the strings, since utils::stripsuffix
+ * will replace a '/' with a '\0'.
+ */
+
+bool utils::nosuffixmatch(const char *first, const char *second)
+{
+  char *s1 = utils::stripsuffix(utils::strdup(first));
+  char *s2 = utils::stripsuffix(utils::strdup(second));
+  bool rv = strcmp(s1,s2) == 0;
+  delete[] s1;
+  delete[] s2;
+  return rv;
+}
+
 /* utility function to avoid code repetition when parsing args */
+
 int utils::cfvarg(std::string mode, const char *arg, char *&cfv_id)
 {
   int rv = utils::NONE;

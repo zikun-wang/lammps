@@ -28,6 +28,38 @@ namespace LAMMPS_NS {
 
   namespace utils {
 
+    /** \brief Create a copy of a C-style string
+     *
+     * \param in input string
+     * \return copied string
+     *
+     * This uses "new" to allocate the storage so it must be
+     * deallocated with "delete[]"
+     */
+    char *strdup(const char *in);
+
+    /** \brief Truncate string to remove known accelerator suffixes
+     *
+     * \param style style name
+     * \return style name with possible accelerator suffix removed
+     *
+     * This modifies the style string passed as an argument to look
+     * any known accelerator suffixes like "/gpu", "/intel", "/omp" etc.
+     * and replaces the '/' character with a '\0' and returns
+     */
+    char *stripsuffix(char *style);
+
+    /** \brief Compare two strings with suffixes removed
+     *
+     * \param first style string
+     * \param second style string
+     * \return true if strings match while ignoring known suffixes, or false
+     *
+     * This compares two strings with known accelerator suffixes removed
+     * before comparing.
+     */
+    bool nosuffixmatch(const char *first, const char *second);
+
     /** \brief Match text against a simplified regex pattern
      *
      *  \param text the text to be matched against the pattern

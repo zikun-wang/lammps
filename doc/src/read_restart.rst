@@ -9,10 +9,16 @@ Syntax
 
 .. parsed-literal::
 
-   read_restart file flag
+   read_restart file flags
 
 * file = name of binary restart file to read in
-* flag = remap (optional)
+* optional flags may be appended
+
+.. parsed-literal::
+
+   flag = *remap* or *noaccel*
+     *remap* = enforce remapping of atoms into the simulation box
+     *noaccel* = remove known accelerator suffixes from styles
 
 Examples
 """"""""
@@ -55,12 +61,27 @@ changed by the :doc:`balance <balance>` or :doc:`fix balance <fix_balance>` comm
    into the simulation box, updating image flags for the atom
    appropriately.
 
+.. note::
+
+   By default, read_restart will recreate atom, pair and other styles
+   exactly as they were stored in the restart file. In a run using the
+   :doc:`suffix command <suffix>` or
+   :doc:`suffix command line flag <Run_options>`, that will include the
+   appended (accelerator) suffix.  When restarting with a LAMMPS executable
+   that does not include those styles, the restart will fail.  With the
+   optional *noaccel* flag, this behavior is changed.  With that flag
+   any known suffix of an :doc:`accelerated style <Speed_packages>` will
+   be removed.  In case the suffix flag or command line option
+   is used during reading the restart this suffix will be tried, regardless
+   of whether the *noaccel* flag is used.
+
 Restart files are saved in binary format to enable exact restarts,
-meaning that the trajectories of a restarted run will precisely match
+meaning that the trajectories of a restarted run will closely match
 those produced by the original run had it continued on.
 
-Several things can prevent exact restarts due to round-off effects, in
-which case the trajectories in the 2 runs will slowly diverge.  These
+Several things can prevent exact restarts due to propagation of round-off
+effects, in which case the trajectories in the 2 runs will at some point
+start diverging exponentially.  These
 include running on a different number of processors or changing
 certain settings such as those set by the :doc:`newton <newton>` or
 :doc:`processors <processors>` commands.  LAMMPS will issue a warning in
@@ -83,7 +104,7 @@ produced the restart file, it could be a LAMMPS bug, so consider
 :doc:`reporting it <Errors_bugs>` if you think the behavior is a bug.
 
 Because restart files are binary, they may not be portable to other
-machines.  In this case, you can use the :doc:`-restart command-line switch <Run_options>` to convert a restart file to a data file.
+machines.  In this case, you can use the :doc:`-r2data command-line switch <Run_options>` to convert a restart file to a data file.
 
 Similar to how restart files are written (see the
 :doc:`write_restart <write_restart>` and :doc:`restart <restart>`

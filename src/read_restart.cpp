@@ -69,7 +69,9 @@ enum{VERSION,SMALLINT,TAGINT,BIGINT,
 
 /* ---------------------------------------------------------------------- */
 
-ReadRestart::ReadRestart(LAMMPS *lmp) : Pointers(lmp) {}
+ReadRestart::ReadRestart(LAMMPS *lmp) : Pointers(lmp) {
+  noaccelflag = 0;
+}
 
 /* ---------------------------------------------------------------------- */
 
@@ -89,8 +91,9 @@ void ReadRestart::command(int narg, char **arg)
   // check for remap option
 
   int remapflag = 0;
-  if (narg == 2) {
-    if (strcmp(arg[1],"remap") == 0) remapflag = 1;
+  for (int iarg=1; iarg < narg; ++iarg) {
+    if (strcmp(arg[iarg],"remap") == 0) remapflag = 1;
+    else if (strcmp(arg[iarg],"noaccel") == 0) noaccelflag = 1;
     else error->all(FLERR,"Illegal read_restart command");
   }
 
@@ -856,7 +859,8 @@ void ReadRestart::header(int incompatible)
     // create new AtomVec class using any stored args
 
     } else if (flag == ATOM_STYLE) {
-      char *style = utils::stripsuffix(read_string());
+      char *style = read_string();
+      if (noaccelflag) style = utils::stripsuffix(style);
       int nargcopy = read_int();
       char **argcopy = new char*[nargcopy];
       for (int i = 0; i < nargcopy; i++)
@@ -996,7 +1000,8 @@ void ReadRestart::force_fields()
   while (flag >= 0) {
 
     if (flag == PAIR) {
-      style = utils::stripsuffix(read_string());
+      style = read_string();
+      if (noaccelflag) style = utils::stripsuffix(style);
       force->create_pair(style,1);
       delete [] style;
       if (comm->me ==0) {
@@ -1008,7 +1013,8 @@ void ReadRestart::force_fields()
       force->pair->read_restart(fp);
 
     } else if (flag == NO_PAIR) {
-      style = utils::stripsuffix(read_string());
+      style = read_string();
+      if (noaccelflag) style = utils::stripsuffix(style);
       if (comm->me ==0) {
         if (screen) fprintf(screen,"  pair style %s stores no "
                             "restart info\n", style);
@@ -1019,7 +1025,8 @@ void ReadRestart::force_fields()
       force->pair_restart = style;
 
     } else if (flag == BOND) {
-      style = utils::stripsuffix(read_string());
+      style = read_string();
+      if (noaccelflag) style = utils::stripsuffix(style);
       force->create_bond(style,1);
       delete [] style;
       if (comm->me ==0) {
@@ -1031,7 +1038,8 @@ void ReadRestart::force_fields()
       force->bond->read_restart(fp);
 
     } else if (flag == ANGLE) {
-      style = utils::stripsuffix(read_string());
+      style = read_string();
+      if (noaccelflag) style = utils::stripsuffix(style);
       force->create_angle(style,1);
       delete [] style;
       if (comm->me ==0) {
@@ -1043,7 +1051,8 @@ void ReadRestart::force_fields()
       force->angle->read_restart(fp);
 
     } else if (flag == DIHEDRAL) {
-      style = utils::stripsuffix(read_string());
+      style = read_string();
+      if (noaccelflag) style = utils::stripsuffix(style);
       force->create_dihedral(style,1);
       delete [] style;
       if (comm->me ==0) {
@@ -1055,7 +1064,8 @@ void ReadRestart::force_fields()
       force->dihedral->read_restart(fp);
 
     } else if (flag == IMPROPER) {
-      style = utils::stripsuffix(read_string());
+      style = read_string();
+      if (noaccelflag) style = utils::stripsuffix(style);
       force->create_improper(style,1);
       delete [] style;
       if (comm->me ==0) {

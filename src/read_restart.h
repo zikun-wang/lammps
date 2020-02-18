@@ -37,7 +37,9 @@ class ReadRestart : protected Pointers {
                              // 1 = restart file is parallel (multiple files)
   int multiproc_file;        // # of parallel files in restart
   int nprocs_file;           // total # of procs that wrote restart file
-
+  int noaccelflag;           // 1 if stripping accelerator suffixes from styles
+                             // 0 if leaving style names unchanged
+  
   // MPI-IO values
 
   int mpiioflag;               // 1 for MPIIO output, else 0

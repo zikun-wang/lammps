@@ -117,7 +117,7 @@ void Angle::ev_setup(int eflag, int vflag, int alloc)
   }
 
   // zero accumulators
-
+  //change
   if (eflag_global) energy = 0.0;
   if (vflag_global) for (i = 0; i < 6; i++) virial[i] = 0.0;
   if (eflag_atom && alloc) {

@@ -1,0 +1,87 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "lammps",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "gitversion::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-gitversion-Debug-a361e14f166722fbd2e7.json",
+					"name" : "gitversion",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "install-python::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-install-python-Debug-4c8b14d820dbe873da43.json",
+					"name" : "install-python",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "lmp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-lmp-Debug-94ee4512a385804ec246.json",
+					"name" : "lmp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "mpi_stubs::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mpi_stubs-Debug-d594bfc09b8a4792c475.json",
+					"name" : "mpi_stubs",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/GroupProject/cmake/out/build/x64-Debug",
+		"source" : "D:/GroupProject/cmake"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 0
+	}
+}

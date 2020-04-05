@@ -1,0 +1,11 @@
+The MPI test test_mpi for CXX in mode normal failed to compile with the following output:
+Change Dir: D:/GroupProject/cmake/out/build/x64-Debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):F:/Visual Studio/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe cmTC_7dc0f && [1/2] Building CXX object CMakeFiles\cmTC_7dc0f.dir\test_mpi.cpp.obj
+FAILED: CMakeFiles/cmTC_7dc0f.dir/test_mpi.cpp.obj 
+"F:\Visual Studio\VC\Tools\MSVC\14.23.28105\bin\HostX64\x64\cl.exe"  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\cmTC_7dc0f.dir\test_mpi.cpp.obj /FdCMakeFiles\cmTC_7dc0f.dir\ /FS -c D:\GroupProject\cmake\out\build\x64-Debug\CMakeFiles\FindMPI\test_mpi.cpp
+D:\GroupProject\cmake\out\build\x64-Debug\CMakeFiles\FindMPI\test_mpi.cpp(1): fatal error C1083: 无法打开包括文件: “mpi.h”: No such file or directory
+ninja: build stopped: subcommand failed.
+
+
+

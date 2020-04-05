@@ -1,0 +1,9 @@
+D:/GroupProject/cmake/out/build/x64-Debug/CMakeFiles/install-python.dir
+D:/GroupProject/cmake/out/build/x64-Debug/CMakeFiles/mpi_stubs.dir
+D:/GroupProject/cmake/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+D:/GroupProject/cmake/out/build/x64-Debug/CMakeFiles/gitversion.dir
+D:/GroupProject/cmake/out/build/x64-Debug/CMakeFiles/lmp.dir
+D:/GroupProject/cmake/out/build/x64-Debug/CMakeFiles/list_install_components.dir
+D:/GroupProject/cmake/out/build/x64-Debug/CMakeFiles/install/local.dir
+D:/GroupProject/cmake/out/build/x64-Debug/CMakeFiles/install.dir
+D:/GroupProject/cmake/out/build/x64-Debug/CMakeFiles/edit_cache.dir
